@@ -1,4 +1,4 @@
-name: Lint code
+name: Code scanning
 
 on: pull_request
 
@@ -17,10 +17,10 @@ jobs:
         with:
           terraform_version: "~>0.15"
 
-      - name: Terraform fmt
+      - name: "Terraform: Format"
         run: terraform fmt -recursive -check
       
-      - name: Run super linter
+      - name: Run linter
         uses: github/super-linter@v3
         env:
           VALIDATE_ALL_CODEBASE: false
