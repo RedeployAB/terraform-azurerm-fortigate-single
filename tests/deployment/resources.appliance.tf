@@ -21,7 +21,7 @@ module "test_appliance" {
   resource_group_name = azurerm_virtual_network.test_appliance.resource_group_name
   location            = azurerm_virtual_network.test_appliance.location
   size                = var.size
-  os_version          = var.version
+  os_version          = var.os_version
 
   admin_username = random_string.appliance_admin.result
   admin_password = random_password.appliance_admin.result

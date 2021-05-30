@@ -16,7 +16,7 @@ variable "size" {
   default = "Standard_DS2_v2"
 }
 
-variable "version" {
+variable "os_version" {
   type    = string
   default = "6.4.5"
 }
