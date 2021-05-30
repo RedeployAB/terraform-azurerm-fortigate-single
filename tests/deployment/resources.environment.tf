@@ -8,6 +8,7 @@ resource "azurerm_virtual_network" "test_appliance" {
 }
 
 resource "azurerm_subnet" "test_appliance" {
+  #ts:skip=accurics.azure.NS.161 NSG association is not detected
   for_each = local.subnets
 
   name                 = each.value.name
@@ -16,24 +17,10 @@ resource "azurerm_subnet" "test_appliance" {
   address_prefixes     = each.value.address_prefixes
 }
 
-# resource "azurerm_subnet" "public_subnet" {
-#   name                 = "sn-test-public"
-#   resource_group_name  = azurerm_virtual_network.test_appliance.resource_group_name
-#   virtual_network_name = azurerm_virtual_network.test_appliance.name
-#   address_prefixes     = ["10.100.10.0/28"]
-# }
-
-# resource "azurerm_subnet" "private_subnet" {
-#   name                 = "sn-test-private"
-#   resource_group_name  = azurerm_virtual_network.test_appliance.resource_group_name
-#   virtual_network_name = azurerm_virtual_network.test_appliance.name
-#   address_prefixes     = ["10.100.10.16/28"]
-# }
-
 resource "azurerm_network_security_group" "test_appliance" {
   for_each = local.subnets
 
-  name                = "nsg-${each.value-name}"
+  name                = "nsg-${each.value.name}"
   resource_group_name = azurerm_virtual_network.test_appliance.resource_group_name
   location            = azurerm_virtual_network.test_appliance.location
 

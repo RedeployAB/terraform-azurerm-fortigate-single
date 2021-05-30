@@ -26,10 +26,10 @@ module "test_appliance" {
   admin_username = random_string.appliance_admin.result
   admin_password = random_password.appliance_admin.result
 
-  public_subnet_id             = azurerm_subnet.public_subnet.id
-  public_interface_ip_address  = cidrhost(azurerm_subnet.public_subnet.address_prefixes[0], 4)
-  private_subnet_id            = azurerm_subnet.private_subnet.id
-  private_interface_ip_address = cidrhost(azurerm_subnet.private_subnet.address_prefixes[0], 4)
+  public_subnet_id             = azurerm_subnet.test_appliance["public"].id
+  public_interface_ip_address  = cidrhost(azurerm_subnet.test_appliance["public"].address_prefixes[0], 4)
+  private_subnet_id            = azurerm_subnet.test_appliance["private"].id
+  private_interface_ip_address = cidrhost(azurerm_subnet.test_appliance["private"].address_prefixes[0], 4)
 
   user_assigned_identity_id = azurerm_user_assigned_identity.test_appliance.id
 
