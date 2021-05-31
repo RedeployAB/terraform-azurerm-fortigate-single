@@ -1,6 +1,6 @@
 variable "name" {
   type        = string
-  description = "Name for the firewall deployment."
+  description = "Name for the firewall appliance."
 
   validation {
     condition     = can(regex("^[a-zA-Z0-9-]{1,60}$", var.name))
