@@ -11,7 +11,6 @@ resource "azurerm_public_ip" "appliance" {
   tags = local.resource_tags
 }
 
-# TODO: Use a count or for_each to create the network interfaces
 resource "azurerm_network_interface" "appliance" {
   for_each = local.network_interfaces
 
