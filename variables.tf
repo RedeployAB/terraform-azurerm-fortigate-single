@@ -24,7 +24,6 @@ variable "location" {
   default     = null
 }
 
-# TODO: Add validation to only accept SSD sizes
 variable "size" {
   type        = string
   description = "VM size for the appliance. Default is the smallest size that supports accelerated networking."
@@ -48,21 +47,21 @@ variable "license_type" {
   default     = "payg"
 
   validation {
-    condition     = contains(["payg"], lower(var.license_type))
+    condition     = contains(["payg", "byol"], lower(var.license_type))
     error_message = "Currently only PAYG deployments are supported."
   }
 }
 
 variable "license_path" {
   type        = string
-  description = "Path to a license file used for BYOL deployments."
-  default     = "./license.lic"
+  description = "Path to a license file used for BYOL deployments. Defaults to license.lic in the root module directory."
+  default     = "license.lic"
 }
 
 variable "config_path" {
   type        = string
-  description = "Path to a custom configuration file used while deploying the firewall."
-  default     = "./bootstrap.conf"
+  description = "Path to a custom configuration file used while deploying the firewall. Defaults to the config file provided with the module."
+  default     = null
 }
 
 variable "os_disk_name" {
@@ -79,7 +78,7 @@ variable "log_disk_name" {
 
 variable "log_disk_size_gb" {
   type        = number
-  description = "Size of the disk used for appliance logs."
+  description = "Size (in GB) of the disk used for appliance logs."
   default     = 30
 }
 
@@ -97,7 +96,7 @@ variable "admin_password" {
 
 variable "disk_encryption_set_id" {
   type        = string
-  description = "Resource ID of an disk encryption set the appliance should use. Will be skipped if omitted."
+  description = "Resource ID of an disk encryption set the appliance should use. Will be skipped if omitted. Note that the managed identity must have access to the encryption key for this to work."
   default     = null
 }
 
@@ -167,5 +166,5 @@ variable "inherit_resource_group_tags" {
 
 variable "user_assigned_identity_id" {
   type        = string
-  description = "Resource ID of the managed identity which the appliance will use for the SDN connector."
+  description = "Resource ID of the managed identity which the appliance will use for the SDN connector and disk encryption."
 }

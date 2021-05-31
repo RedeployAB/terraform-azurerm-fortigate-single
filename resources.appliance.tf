@@ -42,8 +42,7 @@ resource "azurerm_linux_virtual_machine" "appliance" {
   disable_password_authentication = false
   availability_set_id             = var.availability_set_id
 
-  # TODO: Create config file data source
-  # custom_data = data.template_file.config.rendered
+  custom_data = base64encode(data.template_file.config.rendered)
 
   # Interface order must be specified so the public interface
   # is selected as the primary interface.
@@ -106,10 +105,10 @@ resource "azurerm_virtual_machine_data_disk_attachment" "logs" {
   caching            = "ReadWrite"
 }
 
-# data "template_file" "config" {
-#   template = file(var.config_path)
-#   vars = {
-#     type         = var.license_type
-#     license_file = var.license
-#   }
-# }
+data "template_file" "config" {
+  template = file(local.config_path)
+  vars = {
+    license_type = var.license_type
+    license_file = var.license_path
+  }
+}
