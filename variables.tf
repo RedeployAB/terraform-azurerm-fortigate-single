@@ -20,8 +20,7 @@ variable "resource_group_name" {
 
 variable "location" {
   type        = string
-  description = "Location used for the deployed resources. Must be the same as the location used for network resources (virtual network, subnet), which will be used by default."
-  default     = null
+  description = "Location used for the deployed resources. Must be the same as the location used for network resources (virtual network, subnet)."
 }
 
 variable "size" {
@@ -120,12 +119,12 @@ variable "public_interface_ip_address" {
 
 variable "public_subnet_id" {
   type        = string
-  description = "Resource ID of the subnet where the public NIC will be residing."
+  description = "Resource ID of the subnet where the public (internet facing) NIC will be residing."
 }
 
 variable "private_subnet_id" {
   type        = string
-  description = "Resource ID of the subnet where the private NIC will be residing."
+  description = "Resource ID of the subnet where the private (non-internet facing) NIC will be residing."
 }
 
 variable "private_interface_name" {
@@ -158,13 +157,7 @@ variable "tags" {
   default     = {}
 }
 
-variable "inherit_resource_group_tags" {
-  type        = bool
-  description = "Decides whether to inherit the tags from the resource group or not, and appends them to the resource tags."
-  default     = false
-}
-
 variable "user_assigned_identity_id" {
   type        = string
-  description = "Resource ID of the managed identity which the appliance will use for the SDN connector and disk encryption."
+  description = "Resource ID of the managed identity which the appliance will use for the SDN connector functionality and accessing disk encryption keys."
 }

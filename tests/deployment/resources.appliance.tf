@@ -33,6 +33,5 @@ module "test_deployment" {
 
   user_assigned_identity_id = azurerm_user_assigned_identity.test_environment.id
 
-  inherit_resource_group_tags = true
-  tags                        = var.tags
+  tags = data.azurerm_resource_group.test_environment.tags
 }

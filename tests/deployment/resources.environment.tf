@@ -1,10 +1,14 @@
+data "azurerm_resource_group" "test_environment" {
+  name = var.resource_group_name
+}
+
 resource "azurerm_virtual_network" "test_environment" {
   name                = "vnet-test-fgtvm"
   resource_group_name = var.resource_group_name
   location            = var.location
   address_space       = ["10.100.10.0/27"]
 
-  tags = var.tags
+  tags = data.azurerm_resource_group.test_environment.tags
 }
 
 resource "azurerm_subnet" "test_environment" {
@@ -24,7 +28,7 @@ resource "azurerm_network_security_group" "test_environment" {
   resource_group_name = azurerm_virtual_network.test_environment.resource_group_name
   location            = azurerm_virtual_network.test_environment.location
 
-  tags = var.tags
+  tags = data.azurerm_resource_group.test_environment.tags
 }
 
 resource "azurerm_subnet_network_security_group_association" "test_environment" {
@@ -39,5 +43,5 @@ resource "azurerm_user_assigned_identity" "test_environment" {
   resource_group_name = azurerm_virtual_network.test_environment.resource_group_name
   location            = azurerm_virtual_network.test_environment.location
 
-  tags = var.tags
+  tags = data.azurerm_resource_group.test_environment.tags
 }

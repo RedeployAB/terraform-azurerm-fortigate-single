@@ -1,14 +1,10 @@
-data "azurerm_resource_group" "appliance" {
-  name = var.resource_group_name
-}
-
 resource "azurerm_public_ip" "appliance" {
   name                = local.public_ip_name
   resource_group_name = var.resource_group_name
-  location            = local.location
+  location            = var.location
   allocation_method   = "Static"
 
-  tags = local.resource_tags
+  tags = var.tags
 }
 
 resource "azurerm_network_interface" "appliance" {
@@ -16,7 +12,7 @@ resource "azurerm_network_interface" "appliance" {
 
   name                          = each.value.name
   resource_group_name           = var.resource_group_name
-  location                      = local.location
+  location                      = var.location
   enable_accelerated_networking = local.enable_accelerated_networking
   enable_ip_forwarding          = true
 
@@ -28,13 +24,13 @@ resource "azurerm_network_interface" "appliance" {
     public_ip_address_id          = each.key == "public" && var.attach_public_ip ? azurerm_public_ip.appliance.id : null
   }
 
-  tags = local.resource_tags
+  tags = var.tags
 }
 
 resource "azurerm_linux_virtual_machine" "appliance" {
   name                = var.name
   resource_group_name = var.resource_group_name
-  location            = local.location
+  location            = var.location
 
   size                            = var.size
   admin_username                  = var.admin_username
@@ -82,20 +78,20 @@ resource "azurerm_linux_virtual_machine" "appliance" {
     identity_ids = [var.user_assigned_identity_id]
   }
 
-  tags = local.resource_tags
+  tags = var.tags
 }
 
 resource "azurerm_managed_disk" "logs" {
   name                = local.log_disk_name
   resource_group_name = var.resource_group_name
-  location            = local.location
+  location            = var.location
 
   storage_account_type   = "Standard_LRS"
   create_option          = "Empty"
   disk_size_gb           = var.log_disk_size_gb
   disk_encryption_set_id = var.disk_encryption_set_id
 
-  tags = local.resource_tags
+  tags = var.tags
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "logs" {
