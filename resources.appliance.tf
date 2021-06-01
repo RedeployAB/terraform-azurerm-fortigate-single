@@ -104,7 +104,7 @@ resource "azurerm_virtual_machine_data_disk_attachment" "logs" {
 data "template_file" "config" {
   template = file(local.config_path)
   vars = {
-    license_type = var.license_type
-    license_file = var.license_path
+    license_type          = var.license_type
+    license_file_contents = fileexists(local.license_path) ? file(local.license_path) : null
   }
 }
