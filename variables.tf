@@ -230,3 +230,9 @@ variable "user_assigned_identity_id" {
     error_message = "The value must be a valid User Assigned Identity resource ID."
   }
 }
+
+variable "boot_diagnostics_storage_account_uri" {
+  type        = string
+  description = "URI to storage account for boot diagnostics. Optional."
+  default     = null
+}

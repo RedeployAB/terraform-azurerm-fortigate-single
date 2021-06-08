@@ -70,7 +70,7 @@ resource "azurerm_linux_virtual_machine" "appliance" {
   # Setting storage_account_uri to null creates a
   # managed boot diagnostic storage account.
   boot_diagnostics {
-    storage_account_uri = null
+    storage_account_uri = var.boot_diagnostics_storage_account_uri
   }
 
   identity {
