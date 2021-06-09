@@ -233,6 +233,6 @@ variable "user_assigned_identity_id" {
 
 variable "boot_diagnostics_storage_account_uri" {
   type        = string
-  description = "URI to storage account blob endpoint for boot diagnostic files. Optional."
+  description = "URI to storage account primary blob endpoint for boot diagnostic files. Optional."
   default     = null
 }
