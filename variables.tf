@@ -52,7 +52,7 @@ variable "license_type" {
 
   validation {
     condition     = contains(["payg", "byol"], lower(var.license_type))
-    error_message = "Only PAYG or BYOL are supported values."
+    error_message = "Value of license_type must be either PAYG or BYOL."
   }
 }
 
