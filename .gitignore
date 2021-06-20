@@ -28,5 +28,5 @@ override.tf.json
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
 
-# Skip lockfile for deployment test
-tests/**/.terraform.lock.hcl
+# Skip lockfiles for the module
+.terraform.lock.hcl
