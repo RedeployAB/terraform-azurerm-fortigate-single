@@ -106,6 +106,6 @@ data "template_file" "config" {
   template = file(local.config_path)
   vars = {
     license_type          = var.license_type
-    license_file_contents = fileexists(local.license_path) ? file(local.license_path) : null
+    license_file_contents = local.license_contents
   }
 }
