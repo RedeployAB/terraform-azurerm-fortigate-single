@@ -37,10 +37,10 @@ variable "size" {
 variable "os_version" {
   type        = string
   description = "Specifies the version number of the FortiOS release to deploy."
-  default     = "6.4.5"
+  default     = "6.4.6"
 
   validation {
-    condition     = contains(["6.4.5"], var.os_version)
+    condition     = contains(["6.4.5", "6.4.6"], var.os_version)
     error_message = "OS version is not supported by this module."
   }
 }
