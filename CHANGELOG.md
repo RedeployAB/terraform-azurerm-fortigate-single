@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD024/no-duplicate-heading/no-duplicate-header -->
 # Changelog
 
 All notable changes to this module will be documented in this file.
