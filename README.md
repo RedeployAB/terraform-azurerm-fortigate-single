@@ -18,12 +18,12 @@ This module deploys a single FortiGate appliance to a virtual network.
 # Start by creating the referenced resources
 
 module "fortigate" {
-  source = "github.com/RedeployAB/terraform-azurerm-fortigate-single?ref=v0.1.0"
+  source = "github.com/RedeployAB/terraform-azurerm-fortigate-single?ref=v0.2.0"
 
   name                = "fgtvm"
   resource_group_name = azurerm_resource_group.fortigate.name
   location            = azurerm_resource_group.fortigate.location
-  os_version          = "6.4.5"
+  os_version          = "6.4.6"
 
   # Root credentials
   admin_username = random_string.appliance_admin.result
