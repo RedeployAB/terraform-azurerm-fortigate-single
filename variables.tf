@@ -217,7 +217,7 @@ variable "public_ip_sku" {
     condition = (
       contains(["standard", "basic"], lower(var.public_ip_sku))
     )
-    error_messagge = "SKU must be set to either Standard or Basic."
+    error_message = "SKU must be set to either Standard or Basic."
   }
 }
 
