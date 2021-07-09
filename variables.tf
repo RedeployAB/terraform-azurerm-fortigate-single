@@ -208,6 +208,19 @@ variable "public_ip_name" {
   # }
 }
 
+variable "public_ip_sku" {
+  type        = string
+  description = "SKU of Public IP. Must be set to either Standard or Basic. Defaults to Standard."
+  default     = "Standard"
+
+  validation {
+    condition = (
+      contains(["standard", "basic"], lower(var.public_ip_sku))
+    )
+    error_messagge = "SKU must be set to either Standard or Basic."
+  }
+}
+
 variable "attach_public_ip" {
   type        = bool
   description = "Used for skipping attachment of the public IP to the firewall for HA deployments."
