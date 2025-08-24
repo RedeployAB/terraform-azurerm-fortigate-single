@@ -1,5 +1,8 @@
 # Azure FortiGate Terraform Module
 
+> [!IMPORTANT]
+> This repository has been archived and is no longer maintained.
+
 This module deploys a single FortiGate appliance to a virtual network.
 
 * Pre-configured with the Azure SDN connector (using managed identity).
