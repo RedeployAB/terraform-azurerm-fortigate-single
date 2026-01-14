@@ -1,4 +1,4 @@
-name: Test
+name: Tests
 
 on: workflow_dispatch
 
@@ -8,9 +8,13 @@ env:
   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
+defaults:
+  run:
+    working-directory: tests/deployment
+
 jobs:
   deployment:
-    name: Deployment
+    name: Test deployment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,15 +25,12 @@ jobs:
         with:
           terraform_version: "~>0.15"
 
-      - name: Change directory
-        run: cd tests/deployment
-
       - name: "Terraform: Init"
-        run: terraform init -backend=false
+        run: terraform init -backend=false -input=false
 
       - name: "Terraform: Apply"
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -input=false
         continue-on-error: true
       
       - name: "Terraform: Destroy"
-        run: terraform destroy -auto-approve
+        run: terraform destroy -auto-approve -input=false
